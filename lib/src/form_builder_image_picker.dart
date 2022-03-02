@@ -59,6 +59,8 @@ class FormBuilderImagePicker extends FormBuilderField<List<dynamic>> {
   final EdgeInsets bottomSheetPadding;
   final bool preventPop;
 
+  final Widget addPhoto;
+
   /// fit for each image
   final BoxFit fit;
 
@@ -94,6 +96,7 @@ class FormBuilderImagePicker extends FormBuilderField<List<dynamic>> {
     this.galleryIcon = const Icon(Icons.image),
     this.cameraLabel = const Text('Camera'),
     this.galleryLabel = const Text('Gallery'),
+    this.addPhoto = const Icon(Icons.camera_enhance),
     this.bottomSheetPadding = EdgeInsets.zero,
     this.placeholderImage,
   })  : assert(maxImages == null || maxImages >= 0),
@@ -204,19 +207,7 @@ class FormBuilderImagePicker extends FormBuilderField<List<dynamic>> {
                                 height: previewHeight,
                                 image: placeholderImage,
                               )
-                            : Container(
-                                width: previewWidth,
-                                height: previewHeight,
-                                child: Icon(
-                                  Icons.camera_enhance,
-                                  color: state.enabled
-                                      ? iconColor ?? primaryColor
-                                      : disabledColor,
-                                ),
-                                color: (state.enabled
-                                        ? iconColor ?? primaryColor
-                                        : disabledColor)
-                                    .withAlpha(50)),
+                            : addPhoto,
                         onTap: () async {
                           final remainingImages = maxImages == null
                               ? null
