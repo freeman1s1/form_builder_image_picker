@@ -120,13 +120,14 @@ class FormBuilderImagePicker extends FormBuilderField<List<dynamic>> {
             final primaryColor = theme.primaryColor;
             final value = state.effectiveValue;
             final canUpload = state.enabled && !state.hasMaxImages;
+            
 
             return InputDecorator(
               decoration: state.decoration,
               child: SizedBox(
                 height: previewHeight,
                 child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
+                  scrollDirection: maxImages == 1 ? Axis.vertical : Axis.horizontal,
                   itemCount: value.length + (canUpload ? 1 : 0),
                   itemBuilder: (context, index) {
                     if (index < value.length) {
@@ -235,22 +236,6 @@ class FormBuilderImagePicker extends FormBuilderField<List<dynamic>> {
                               );
                             },
                           );
-                          // if (remainingImages == 1) {
-                          // } else {
-                          //   final imagePicker = ImagePicker();
-                          //   final picked = await imagePicker.pickMultiImage(
-                          //     maxHeight: maxHeight,
-                          //     maxWidth: maxWidth,
-                          //     imageQuality: imageQuality,
-                          //   );
-                          //   if (picked != null) {
-                          //     state.requestFocus();
-                          //     final actualPicked = remainingImages == null
-                          //         ? picked
-                          //         : picked.take(remainingImages);
-                          //     field.didChange([...value, ...actualPicked]);
-                          //   }
-                          // }
                         },
                       );
                     }
